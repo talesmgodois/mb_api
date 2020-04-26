@@ -15,6 +15,13 @@ namespace :dev do
     bash "source ./.envs/prod.env && rails s"
   end
 
+  desc "deploy"
+  task deploy: :environment do
+    sh "git push heroku master"
+    sh "heroku run rails db:migrate --remote heroku"
+  end
+
+
   def bash cmd 
     cmd = "set -o pipefail && #{cmd}"
     system("bash -c #{cmd.shellescape}")
