@@ -19,7 +19,7 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module MbApi
+module Api
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
@@ -34,7 +34,6 @@ module MbApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-
     #Cors configuration
     config.middleware.insert_before 0, Rack::Cors do
       allow do
@@ -48,3 +47,6 @@ module MbApi
     end
   end
 end
+
+
+# fetch('http://localhost:3000/v1/contacts').then(data => data.json()).then(data => console.log(data)).catch(err => console.error(err))

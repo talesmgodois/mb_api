@@ -32,10 +32,10 @@ class V1::UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-		if @user.destroy
-			render json: {deleted: @user[:id]}, status: :ok
+    if @user.destroy
+      head(:ok)
 		else 
-			render json: @user.errors, status: :error
+			head(:unprocessable_entity)
 		end
   end
 

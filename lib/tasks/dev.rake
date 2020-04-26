@@ -15,6 +15,11 @@ namespace :dev do
     bash "source ./.envs/prod.env && rails s"
   end
 
+acti  desc "run rest"
+  task test: :environment do   
+    bash "source ./.envs/test.env && rails t" 
+  end
+
   desc "deploy"
   task deploy: :environment do
     sh "git push heroku master"
