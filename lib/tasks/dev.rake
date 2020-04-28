@@ -1,38 +1,56 @@
+# frozen_string_literal: true
+
 namespace :dev do
+  namespace :run do
+    desc 'Run dev environment'
+    task dev: :environment do
+      bash 'source ./.envs/dev.env && rails s'
+    end
 
-  desc "Set dev environment"
-  task env_dev: :environment do
-    bash "source ./.envs/dev.env && rails s"
+    desc 'Run prod environment'
+    task prod: :environment do
+      bash 'Run ./.envs/prod.env && rails s'
+    end
+
+    desc 'Run tests'
+    task test: :environment do
+      bash 'source ./.envs/test.env && rails t'
+    end
   end
 
-  desc "Set test environment"
-  task env_test: :environment do   
-    bash "source ./.envs/test.env && rails s" 
+  namespace :console do
+    desc 'Run dev console'
+    task dev: :environment do
+      bash 'source ./.envs/dev.env && rails c'
+    end
+
+    desc 'Run prod console'
+    task prod: :environment do
+      bash 'source ./.envs/prod.env && rails c'
+    end
+
+    desc 'Run test console'
+    task test: :environment do
+      bash 'source ./.envs/test.env && rails c'
+    end
   end
 
-  desc "Set prod environment"
-  task env_prod: :environment do
-    bash "source ./.envs/prod.env && rails s"
+  namespace :deploy do
+    desc 'Deploy at Heroku'
+    task debug: :environment do
+      sh 'git push heroku master'
+      sh 'heroku run rails db:migrate --remote heroku'
+    end
   end
 
-  desc "run rest"
-  task test: :environment do   
-    bash "source ./.envs/test.env && rails t" 
-  end
+  private
 
-  desc "deploy"
-  task deploy: :environment do
-    sh "git push heroku master"
-    sh "heroku run rails db:migrate --remote heroku"
-  end
-
-
-  def bash cmd 
+  def bash(cmd)
     cmd = "set -o pipefail && #{cmd}"
     system("bash -c #{cmd.shellescape}")
-    cmd_status = $?
+    cmd_status = $CHILD_STATUS
     if cmd_status != 0
-        raise "'#{cmd}' execution failed (exit code: #{cmd_status})"
-    end 
-  end 
+      raise "'#{cmd}' execution failed (exit code: #{cmd_status})"
+    end
+  end
 end
