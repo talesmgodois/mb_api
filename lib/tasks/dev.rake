@@ -9,7 +9,7 @@ namespace :dev do
 
     desc 'Run prod environment'
     task prod: :environment do
-      bash 'Run ./.envs/prod.env && rails s'
+      bash 'source ./.envs/prod.env && rails s'
     end
 
     desc 'Run tests'
@@ -37,7 +37,7 @@ namespace :dev do
 
   namespace :deploy do
     desc 'Deploy at Heroku'
-    task debug: :environment do
+    task heroku: :environment do
       sh 'git push heroku master'
       sh 'heroku run rails db:migrate --remote heroku'
     end

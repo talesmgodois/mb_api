@@ -7,12 +7,12 @@ class V1::UsersController < ApplicationController
 		render json: users, status: :ok
 	end
 
-	def create
-		user = User.new(get_params)
-
-		if user.save!
+  def create
+    user = User.new(get_params)
+    begin
+      user.save!
       render json: user, status: :created
-    else
+    rescue => exception
       render json: user.errors, status: :unprocessable_entity
     end
 	end
@@ -23,6 +23,8 @@ class V1::UsersController < ApplicationController
 
 	  # PATCH/PUT /users/1
   def update
+    puts("get_params")
+    puts get_params
     if @user.update(get_params)
       render json: @user
     else
@@ -47,6 +49,8 @@ class V1::UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def get_params
-      params.require(:user).permit(:name, :email)
+      params[:user][:password] = params[:password] unless params[:user][:password]
+      params[:user][:password_confirmation] = params[:password_confirmation] unless params[:user][:password_confirmation]
+      params.require(:user).permit(:email, :name, :password, :password_confirmation)
     end
 end
