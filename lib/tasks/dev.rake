@@ -14,7 +14,7 @@ namespace :dev do
 
     desc 'Run tests'
     task test: :environment do
-      bash 'source ./.envs/test.env && rails t'
+      bash 'source ./.envs/test.env && bundle exec guard'
     end
   end
 
