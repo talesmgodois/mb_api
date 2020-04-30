@@ -2,7 +2,7 @@ require 'test_helper'
 
 class V1::UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = User.new(name: "Example User", email: "user@example.com")
+    @user = User.new(name: "Example User", email: "user@example.com", password: 'test', password_confirmation:'test')
   end
 
   test "should be valid" do
