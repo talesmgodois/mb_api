@@ -35,6 +35,23 @@ namespace :dev do
     end
   end
 
+  namespace :migrate do
+    desc 'Migrate dev environment'
+    task dev: :environment do
+      bash 'source ./.envs/dev.env && rails db:migrate'
+    end
+
+    desc 'Migrate prod environment'
+    task prod: :environment do
+      bash 'source ./.envs/prod.env && rails db:migrate'
+    end
+
+    desc 'Migrate tests'
+    task test: :environment do
+      bash 'source ./.envs/test.env && rails db:migrate'
+    end
+  end
+
   namespace :deploy do
     desc 'Deploy at Heroku'
     task heroku: :environment do
