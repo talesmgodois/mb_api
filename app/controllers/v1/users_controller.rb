@@ -1,5 +1,5 @@
 class V1::UsersController < ApplicationController
-
+  before_action :authenticate_request!
 	before_action :set, only: [:show, :update, :destroy]
 
 	def index
@@ -23,8 +23,6 @@ class V1::UsersController < ApplicationController
 
 	  # PATCH/PUT /users/1
   def update
-    puts("get_params")
-    puts get_params
     if @user.update(get_params)
       render json: @user
     else

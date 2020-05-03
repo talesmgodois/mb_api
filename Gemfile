@@ -25,7 +25,7 @@ gem 'jwt'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '~> 1.4', '>= 1.4.6'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
@@ -51,6 +51,9 @@ group :test do
   gem 'rails-controller-testing', '1.0.4'
   gem 'selenium-webdriver',       '3.142.4'
   gem 'webdrivers',               '4.1.2'
+  gem 'listen',                '3.1.5'
+  gem 'spring',                '2.1.0'
+  gem 'spring-watcher-listen', '2.0.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
