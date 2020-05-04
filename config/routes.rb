@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  apipie
   get 'home' => 'home#index'
   namespace :v1 do 
     defaults format: :json do
