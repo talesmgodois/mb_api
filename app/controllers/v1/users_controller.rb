@@ -1,5 +1,5 @@
 class V1::UsersController < ApplicationController
-  before_action :authenticate_request!
+  before_action :authenticate_request!, except: [:create]
 	before_action :set, only: [:show, :update, :destroy]
 
 	def index

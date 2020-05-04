@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get 'home' => 'home#index'
   namespace :v1 do 
     defaults format: :json do
-      devise_for :users
       resources :users
+      devise_for :users
       post 'auth' => 'auth#authenticate_user'
     end
   end
