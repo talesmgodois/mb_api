@@ -1,7 +1,7 @@
 class V1::AuthController < ApplicationController
 
   api :POST, '/v1/auth'
-
+  JWT_SECRET = 'AIOOOOO Silver'
   param :email, String, desc: 'User Email'
   param :password, String, desc: 'User Password'
   def authenticate_user

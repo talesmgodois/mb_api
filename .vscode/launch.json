@@ -11,12 +11,7 @@
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/bin/rails",
             "env": {
-                "RAILS_ENV": "development",
-                "DB": "meusboletos",
-                "DB_HOST": "mybills.czxc0m4hmvl2.us-east-2.rds.amazonaws.com",
-                "DB_PORT": 5432,
-                "DB_USER": "meusboletos",
-                "DB_PASS": "meusboletos"
+                "RAILS_ENV": "production"
             },
             "args": [
                 "server"
