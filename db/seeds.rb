@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+def seedInvoices
+  Invoice.destroy_all()
+
+  Invoice.create!([
+    {code: 1, description:'Teste'},
+    {code: 2, description:'Teste'},
+    {code: 3, description:'Teste'},
+    {code: 4, description:'Teste'}
+  ])
+end
+
+
+seedInvoices()
