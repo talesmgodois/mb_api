@@ -18,4 +18,16 @@ def seedInvoices
 end
 
 
-seedInvoices()
+def seedPerson()
+  Person.destroy_all()
+
+  Person.create!([
+    {first_name:"Tales", last_name:"marinho", age: 29},
+    {first_name:"TBert", last_name:"Bert", age: 17},
+    {first_name:"Joey", last_name:"Triniany", age: 23}
+  ])
+end
+
+
+# seedInvoices()
+seedPerson()

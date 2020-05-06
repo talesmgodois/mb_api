@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_205016) do
+ActiveRecord::Schema.define(version: 2020_05_06_115657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "hobbies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "hobbies_people", id: false, force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "hobby_id", null: false
+    t.index ["hobby_id"], name: "index_hobbies_people_on_hobby_id"
+    t.index ["person_id"], name: "index_hobbies_people_on_person_id"
+  end
 
   create_table "invoices", force: :cascade do |t|
     t.integer "code"
@@ -21,6 +34,44 @@ ActiveRecord::Schema.define(version: 2020_05_04_205016) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "expiration_date"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string "title"
+    t.string "company"
+    t.string "position_id"
+    t.bigint "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_jobs_on_person_id"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "age"
+    t.string "login"
+    t.string "pass"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "personal_infos", force: :cascade do |t|
+    t.float "heigh"
+    t.float "weight"
+    t.bigint "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_personal_infos_on_person_id"
+  end
+
+  create_table "salary_ranges", force: :cascade do |t|
+    t.float "min_salary"
+    t.float "max_salary"
+    t.bigint "job_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_id"], name: "index_salary_ranges_on_job_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,4 +88,9 @@ ActiveRecord::Schema.define(version: 2020_05_04_205016) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "hobbies_people", "hobbies"
+  add_foreign_key "hobbies_people", "people"
+  add_foreign_key "jobs", "people"
+  add_foreign_key "personal_infos", "people"
+  add_foreign_key "salary_ranges", "jobs"
 end

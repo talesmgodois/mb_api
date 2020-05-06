@@ -23,7 +23,7 @@ default: &default
 
 development:
     <<: *default
-    database: meusboletos
+    database: coursera01
     host: localhost
     port: 5433
     username: postgres
