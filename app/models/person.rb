@@ -7,4 +7,7 @@ class Person < ApplicationRecord
   def max_salary
     return approx_sallary.maximum(:max_salary)
   end
+
+  scope :ordered_by_age, -> {order age: :desc}
+  scope :starts_with, ->(str) { where("first_name like :first_name", {first_name: "#{str}%"})}
 end
